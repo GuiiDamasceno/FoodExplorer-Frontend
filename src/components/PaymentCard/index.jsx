@@ -154,7 +154,7 @@ export function PaymentCard() {
   }
 
   useEffect(() => {
-    localStorage.setItem('@foodexplorer:cart', JSON.stringify(cart));
+    localStorage.setItem(`@foodexplorer:cart:${user.name}`, JSON.stringify(cart));
   }, [cart])
 
   return (
