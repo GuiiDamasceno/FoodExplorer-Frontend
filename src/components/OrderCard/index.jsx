@@ -1,6 +1,6 @@
 import { Container } from "./styles";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useAuth } from "../../hooks/auth";
 
@@ -11,14 +11,16 @@ export function OrderCard({ data }) {
 
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem(`@foodexplorer:cart:${user.name}`)) || [])
 
-  async function handleRemoveDishFromCart(deleted) {
+  const navigate = useNavigate()
+
+  function handleRemoveDishFromCart(deleted) {
     const confirmation = window.confirm('Deseja excluir este pedido do carrinho?')
     if (confirmation) {
       setCart(prevState => prevState.filter(item => item.id !== deleted))
       location.reload()
     }
   }
-  
+
   useEffect(() => {
     localStorage.setItem(`@foodexplorer:cart:${user.name}`, JSON.stringify(cart))
   }, [cart])
